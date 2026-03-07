@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(LoginController::class)->group(function () {
@@ -15,4 +16,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('/register', 'register')->name('register.submit');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/users', UsersController::class);
+});

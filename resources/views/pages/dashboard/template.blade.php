@@ -26,6 +26,9 @@
     <!-- Volt CSS -->
     <link type="text/css" href="{{ asset('assets/css/volt.css') }}" rel="stylesheet">
 
+    {{--  datatables CSS  --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.bootstrap5.css">
+
 </head>
 
 <body>
@@ -35,7 +38,7 @@
 
         @include('pages.dashboard.navbar')
 
-        @include('pages.dashboard.sidebar')
+        {{-- @include('pages.dashboard.sidebar') --}}
         @include('sweetalert::alert')
 
         @yield('content')
@@ -43,6 +46,10 @@
         @include('pages.dashboard.footer')
 
     </main>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 
     <!-- Core -->
     <script src="{{ asset('assets/vendor/@popperjs/core/dist/umd/popper.min.js') }}"></script>
@@ -83,6 +90,11 @@
 
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/63b8672806.js" crossorigin="anonymous"></script>
+
+    {{-- datatables --}}
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.bootstrap5.js"></script>
 
     @stack('scripts')
 

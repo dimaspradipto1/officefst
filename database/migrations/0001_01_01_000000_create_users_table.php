@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('npm');
+            $table->string('prodi');
+            $table->string('nohp');
+            $table->string('role')->default('mahasiswa');
+            $table->boolean('is_aktive')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

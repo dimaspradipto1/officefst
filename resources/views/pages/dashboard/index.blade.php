@@ -2,6 +2,7 @@
 
 @section('content')
     <!-- content -->
+     <div class="py-4">
     <div class="row">
       <div class="col-12 mb-4">
         <div class="card bg-yellow-100 border-0 shadow">
@@ -751,5 +752,6 @@
         </span>
       </div>
     </div>
+     </div>
 
 @endsection
