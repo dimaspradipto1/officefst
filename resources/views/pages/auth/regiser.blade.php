@@ -645,7 +645,7 @@
                 @endif
 
                 <!-- Form -->
-                <form method="POST" action="#" id="registerForm" novalidate>
+                <form method="POST" action="{{ route('register.submit') }}" id="registerForm" novalidate>
                     @csrf
 
                     <div class="form-grid">

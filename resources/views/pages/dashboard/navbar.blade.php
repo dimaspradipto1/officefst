@@ -24,9 +24,9 @@
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item dropdown">
-                    <a class="nav-link text-dark notification-bell unread dropdown-toggle"
-                        data-unread-notifications="true" href="#" role="button" data-bs-toggle="dropdown"
-                        data-bs-display="static" aria-expanded="false">
+                    <a class="nav-link text-dark notification-bell {{ ($unreadCount ?? 0) > 0 ? 'unread' : '' }} dropdown-toggle"
+                        data-unread-notifications="{{ ($unreadCount ?? 0) > 0 ? 'true' : 'false' }}" href="#"
+                        role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                         <svg class="icon icon-sm text-gray-900" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -37,115 +37,63 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-center mt-2 py-0">
                         <div class="list-group list-group-flush">
                             <a href="#"
-                                class="text-center text-primary fw-bold border-bottom border-light py-3">Notifications</a>
-                            <a href="#" class="list-group-item list-group-item-action border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="assets/img/team/profile-picture-1.jpg"
-                                            class="avatar-md rounded">
-                                    </div>
-                                    <div class="col ps-0 ms-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="h6 mb-0 text-small">Jose Leos</h4>
-                                            </div>
-                                            <div class="text-end">
-                                                <small class="text-danger">a few moments ago</small>
+                                class="text-center text-primary fw-bold border-bottom border-light py-3">Pemberitahuan</a>
+
+                            @forelse($navbarNotifications ?? [] as $notification)
+                                <a href="{{ route('surat.index') }}"
+                                    class="list-group-item list-group-item-action border-bottom">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div
+                                                class="icon icon-sm {{ $notification->status == 'disetujui' ? 'text-success' : ($notification->status == 'ditolak' ? 'text-danger' : 'text-info') }}">
+                                                <i
+                                                    class="fa-solid {{ $notification->jenis_surat == 'surat kp' ? 'fa-file-contract' : 'fa-file-medical' }}"></i>
                                             </div>
                                         </div>
-                                        <p class="font-small mt-1 mb-0">Added you to an event "Project stand-up"
-                                            tomorrow at 12:30 AM.
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../../assets/img/team/profile-picture-2.jpg"
-                                            class="avatar-md rounded">
-                                    </div>
-                                    <div class="col ps-0 ms-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="h6 mb-0 text-small">Neil Sims</h4>
+                                        <div class="col ps-0 ms-2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="h6 mb-0 text-small">
+                                                        @if (Auth::user()->is_mahasiswa)
+                                                            Update: {{ strtoupper($notification->jenis_surat) }}
+                                                        @else
+                                                            {{ $notification->user->name }}
+                                                        @endif
+                                                    </h4>
+                                                </div>
+                                                <div class="text-end">
+                                                    <small
+                                                        class="text-danger">{{ $notification->updated_at->diffForHumans() }}</small>
+                                                </div>
                                             </div>
-                                            <div class="text-end">
-                                                <small class="text-danger">2 hrs ago</small>
-                                            </div>
+                                            <p class="font-small mt-1 mb-0">
+                                                @if (Auth::user()->is_mahasiswa)
+                                                    @if ($notification->status == 'validasi')
+                                                        Surat Anda sedang divalidasi oleh Dekan.
+                                                    @elseif($notification->status == 'disetujui')
+                                                        Selamat! Surat Anda telah disetujui.
+                                                    @elseif($notification->status == 'ditolak')
+                                                        Maaf, pengajuan surat Anda ditolak.
+                                                    @endif
+                                                @else
+                                                    @if ($notification->status == 'proses')
+                                                        Pengajuan {{ $notification->jenis_surat }} baru masuk.
+                                                    @elseif($notification->status == 'validasi')
+                                                        Perlu persetujuan Dekan (Validasi WD I selesai).
+                                                    @endif
+                                                @endif
+                                            </p>
                                         </div>
-                                        <p class="font-small mt-1 mb-0">You've been assigned a task for "Awesome new
-                                            project".</p>
                                     </div>
+                                </a>
+                            @empty
+                                <div class="p-3 text-center">
+                                    <p class="font-small text-gray-500 mb-0">Tidak ada pemberitahuan baru.</p>
                                 </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../../assets/img/team/profile-picture-3.jpg"
-                                            class="avatar-md rounded">
-                                    </div>
-                                    <div class="col ps-0 m-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="h6 mb-0 text-small">Roberta Casas</h4>
-                                            </div>
-                                            <div class="text-end">
-                                                <small>5 hrs ago</small>
-                                            </div>
-                                        </div>
-                                        <p class="font-small mt-1 mb-0">Tagged you in a document called "Financial
-                                            plans",</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../../assets/img/team/profile-picture-4.jpg"
-                                            class="avatar-md rounded">
-                                    </div>
-                                    <div class="col ps-0 ms-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="h6 mb-0 text-small">Joseph Garth</h4>
-                                            </div>
-                                            <div class="text-end">
-                                                <small>1 d ago</small>
-                                            </div>
-                                        </div>
-                                        <p class="font-small mt-1 mb-0">New message: "Hey, what's up? All set for the
-                                            presentation?"</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action border-bottom">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <!-- Avatar -->
-                                        <img alt="Image placeholder" src="../../assets/img/team/profile-picture-5.jpg"
-                                            class="avatar-md rounded">
-                                    </div>
-                                    <div class="col ps-0 ms-2">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h4 class="h6 mb-0 text-small">Bonnie Green</h4>
-                                            </div>
-                                            <div class="text-end">
-                                                <small>2 hrs ago</small>
-                                            </div>
-                                        </div>
-                                        <p class="font-small mt-1 mb-0">New message: "We need to improve the UI/UX for
-                                            the landing
-                                            page."</p>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" class="dropdown-item text-center fw-bold rounded-bottom py-3">
+                            @endforelse
+
+                            <a href="{{ route('surat.index') }}"
+                                class="dropdown-item text-center fw-bold rounded-bottom py-3">
                                 <svg class="icon icon-xxs text-gray-400 me-1" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
@@ -153,7 +101,7 @@
                                         d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                View all
+                                Lihat Semua
                             </a>
                         </div>
                     </div>
@@ -162,15 +110,24 @@
                     <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="media d-flex align-items-center">
-                            <img class="avatar rounded-circle" alt="Image placeholder"
-                                src="../../assets/img/team/profile-picture-3.jpg">
+                            @if (Auth::user()->profile_photo_path)
+                                <img class="avatar rounded-circle border border-gray-100 shadow-sm"
+                                    alt="Image placeholder"
+                                    src="{{ asset('storage/' . Auth::user()->profile_photo_path) }}"
+                                    style="width: 32px; height: 32px; object-fit: cover;">
+                            @else
+                                <div class="avatar bg-gray-200 rounded-circle d-flex align-items-center justify-content-center border border-gray-300"
+                                    style="width: 32px; height: 32px;">
+                                    <i class="fa-solid fa-user-tie text-gray-700" style="font-size: 14px;"></i>
+                                </div>
+                            @endif
                             <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                                 <span class="mb-0 font-small fw-bold text-gray-900">{{ Auth::user()->name }}</span>
                             </div>
                         </div>
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
                             <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -179,7 +136,7 @@
                             </svg>
                             My Profile
                         </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                             <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -187,8 +144,8 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                             Settings
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        </a> --}}
+                        {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                             <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -196,8 +153,8 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                             Messages
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        </a> --}}
+                        {{-- <a class="dropdown-item d-flex align-items-center" href="#">
                             <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -205,7 +162,7 @@
                                     clip-rule="evenodd"></path>
                             </svg>
                             Support
-                        </a>
+                        </a> --}}
                         <div role="separator" class="dropdown-divider my-1"></div>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

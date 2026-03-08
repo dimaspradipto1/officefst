@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -90,6 +91,17 @@ class LoginController extends Controller
             'password' => Hash::make($request->password),
             'role'     => 'mahasiswa',
         ]);
+
+        Mahasiswa::create([
+            'user_id' => $user->id,
+            'npm'     => $request->npm,
+            'name'    => $request->nama,
+            'email'   => $request->email,
+            'nohp'    => $request->nohp,
+            'prodi'   => $request->prodi,
+        ]);
+
+
 
         Auth::login($user);
 

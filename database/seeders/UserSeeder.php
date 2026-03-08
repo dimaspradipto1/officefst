@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             [
                 'name'      => 'admin',
                 'email'     => 'admin@uis.ac.id',
-                'password'  => Hash::make('admin'),
+                'password'  => Hash::make('ubahsaya'),
                 'npm'       => '-',
                 'prodi'     => '-',
                 'nohp'      => '-',
@@ -37,11 +37,31 @@ class UserSeeder extends Seeder
             [
                 'name'      => 'ansar',
                 'email'     => 'ansar@uis.ac.id',
-                'password'  => Hash::make('ansar'),
+                'password'  => Hash::make('ubahsaya'),
                 'npm'       => '-',
                 'prodi'     => '-',
                 'nohp'      => '-',
                 'role'      => 'admin',
+                'is_aktive' => true,
+            ],
+            [
+                'name'      => 'Dr. Okta Veza, M.kom',
+                'email'     => 'okta@uis.ac.id',
+                'password'  => Hash::make('ubahsaya'),
+                'npm'       => '-',
+                'prodi'     => '-',
+                'nohp'      => '-',
+                'role'      => 'wakil dekan I',
+                'is_aktive' => true,
+            ],
+            [
+                'name'      => 'Ir. Sanusi, ST., M.Eng., Ph.D., IPM',
+                'email'     => 'sanusi@uis.ac.id',
+                'password'  => Hash::make('ubahsaya'),
+                'npm'       => '-',
+                'prodi'     => '-',
+                'nohp'      => '-',
+                'role'      => 'dekan',
                 'is_aktive' => true,
             ]
         ];

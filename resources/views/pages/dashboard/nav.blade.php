@@ -69,6 +69,23 @@
                 </a>
             </li>
 
+            @if(Auth::user()->role == 'mahasiswa')
+                <li class="nav-item">
+                <a href="{{ route('surat.index') }}"
+                    class="nav-link d-flex justify-content-between">
+                    <span>
+                        <span class="sidebar-icon">
+                           <i class="fa-solid fa-file-pen"></i>
+                        </span>
+                        <span class="sidebar-text">Pengajuan Surat</span>
+                    </span>
+                </a>
+            </li>
+            @endif
+            
+
+            @if(Auth::user()->role =='super admin' || Auth::user()->role =='admin' || Auth::user()->role =='wakil dekan
+            I' || Auth::user()->role =='dekan')
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#surat">
@@ -90,7 +107,7 @@
                 <div class="multi-level collapse " role="list" id="surat" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('surat.index') }}">
                                 <span class="sidebar-text" style="font-size: 14px">Surat belum
                                     <br>Tervalidasi</span>
                             </a>
@@ -100,7 +117,7 @@
                 <div class="multi-level collapse " role="list" id="surat" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('surat-tervalidasi') }}">
                                 <span class="sidebar-text" style="font-size: 14px">Surat
                                     Tervalidasi</span>
                             </a>
@@ -110,14 +127,14 @@
                 <div class="multi-level collapse " role="list" id="surat" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('surat-disetujui') }}">
                                 <span class="sidebar-text" style="font-size: 14px">Surat Disetujui</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
-
+            
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
                     data-bs-toggle="collapse" data-bs-target="#master">
@@ -148,32 +165,34 @@
                 <div class="multi-level collapse " role="list" id="master" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="{{ route('mahasiswa.index') }}">
                                 <span class="sidebar-text" style="font-size: 14px">Data Mahasiswa</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
+            @endif
 
             {{-- <li class="nav-item">
-        <a href="https://demo.themesberg.com/volt-pro/pages/kanban.html" target="_blank"
-          class="nav-link d-flex justify-content-between">
-          <span>
-            <span class="sidebar-icon">
-              <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
-                </path>
-              </svg>
-            </span>
-            <span class="sidebar-text">Kanban</span>
-          </span>
-          <span>
-            <span class="badge badge-sm bg-secondary ms-1 text-gray-800">Pro</span>
-          </span>
-        </a>
-      </li> --}}
+                <a href="https://demo.themesberg.com/volt-pro/pages/kanban.html" target="_blank"
+                    class="nav-link d-flex justify-content-between">
+                    <span>
+                        <span class="sidebar-icon">
+                            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                                </path>
+                            </svg>
+                        </span>
+                        <span class="sidebar-text">Kanban</span>
+                    </span>
+                    <span>
+                        <span class="badge badge-sm bg-secondary ms-1 text-gray-800">Pro</span>
+                    </span>
+                </a>
+            </li> --}}
 
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
             <li class="nav-item">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Models\Mahasiswa;
 use App\DataTables\UsersDataTable;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,7 +35,18 @@ class UsersController extends Controller
         $validated['password'] = Hash::make($validated['password']);
         $validated['is_aktive'] = $request->has('is_aktive');
 
-        User::create($validated);
+        $user = User::create($validated);
+
+        if ($user->role === 'mahasiswa') {
+            Mahasiswa::create([
+                'user_id' => $user->id,
+                'npm'     => $user->npm,
+                'name'    => $user->name,
+                'email'   => $user->email,
+                'nohp'    => $user->nohp,
+                'prodi'   => $user->prodi,
+            ]);
+        }
 
         return redirect()->route('users.index')->with('success', 'Data Pengguna berhasil ditambahkan.');
     }
@@ -72,6 +84,19 @@ class UsersController extends Controller
 
         $user->update($validated);
 
+        if ($user->role === 'mahasiswa') {
+            Mahasiswa::updateOrCreate(
+                ['user_id' => $user->id],
+                [
+                    'npm'   => $user->npm,
+                    'name'  => $user->name,
+                    'email' => $user->email,
+                    'nohp'  => $user->nohp,
+                    'prodi' => $user->prodi,
+                ]
+            );
+        }
+
         return redirect()->route('users.index')->with('success', 'Data Pengguna berhasil diperbarui.');
     }
 
@@ -80,6 +105,10 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
+        if ($user->role === 'mahasiswa') {
+            Mahasiswa::where('user_id', $user->id)->delete();
+        }
+
         $user->delete();
 
         return redirect()->route('users.index')->with('success', 'Data Pengguna berhasil dihapus.');

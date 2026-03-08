@@ -67,6 +67,7 @@
     <!-- Charts -->
     <script src="{{ asset('assets/vendor/chartist/dist/chartist.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Datepicker -->
     <script src="{{ asset('assets/vendor/vanillajs-datepicker/dist/js/datepicker.min.js') }}"></script>

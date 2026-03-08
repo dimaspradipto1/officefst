@@ -26,6 +26,7 @@ class User extends Authenticatable
         'nohp',
         'role',
         'is_aktive',
+        'profile_photo_path',
     ];
 
     /**
@@ -49,5 +50,30 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->role === 'admin' || $this->role === 'superadmin';
+    }
+
+    public function getIsMahasiswaAttribute()
+    {
+        return $this->role === 'mahasiswa';
+    }
+
+    public function getIsDekanAttribute()
+    {
+        return $this->role === 'dekan';
+    }
+
+    public function getIsWakilDekanIAttribute()
+    {
+        return $this->role === 'wakil dekan I';
+    }
+
+    public function getNoUnikAttribute()
+    {
+        return $this->npm;
     }
 }
