@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 $user = \Illuminate\Support\Facades\Auth::user();
                 $notifications = collect();
 
-                if ($user->is_admin || $user->is_dekan || $user->is_wakil_dekan_I) {
+                if ($user-> role == 'superadmin' || $user->role == 'dekan' || $user->role == 'wakil dekan I') {
                     // For management: show incoming letters that need action
                     $notifications = \App\Models\Surat::with('user')
                         ->whereIn('status', ['proses', 'validasi'])
