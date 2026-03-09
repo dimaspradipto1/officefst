@@ -84,7 +84,7 @@
             @endif
             
 
-            @if(Auth::user()->role =='super admin' || Auth::user()->role =='admin' || Auth::user()->role =='wakil dekan
+            @if(Auth::user()->role =='superadmin' || Auth::user()->role =='admin' || Auth::user()->role =='wakil dekan
             I' || Auth::user()->role =='dekan')
             <li class="nav-item">
                 <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
