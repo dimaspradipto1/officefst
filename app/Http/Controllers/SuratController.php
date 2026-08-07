@@ -96,7 +96,7 @@ class SuratController extends Controller
 
                     if ($item->status == 'disetujui' && Auth::user()->role == 'mahasiswa') {
                         $buttons .= '
-                            <a href="' . route('surat.show', $item->id) . '" class="btn btn-sm btn-info text-white px-2" title="print">
+                            <a href="' . route('surat.show', $item->slug) . '" class="btn btn-sm btn-info text-white px-2" title="print">
                                 <i class="fa-solid fa-print"></i>
                             </a>
                         ';
@@ -106,7 +106,7 @@ class SuratController extends Controller
 
                         if ($item->status == 'disetujui') {
                             $buttons .= '
-                                        <a href="' . route('surat.show', $item->id) . '" class="btn btn-sm btn-info text-white px-2" title="print">
+                                        <a href="' . route('surat.show', $item->slug) . '" class="btn btn-sm btn-info text-white px-2" title="print">
                                             <i class="fa-solid fa-print"></i>
                                         </a>
                                     ';
@@ -122,7 +122,7 @@ class SuratController extends Controller
                                 ';
 
                             $buttons .= '
-                                    <form action="' . route('surat.destroy', $item->id) . '" method="POST" class="d-inline">
+                                    <form action="' . route('surat.destroy', $item->slug) . '" method="POST" class="d-inline">
                                         ' . csrf_field() . '
                                         ' . method_field('delete') . '
                                         <button type="submit" class="btn btn-danger btn-sm" title="hapus">
@@ -262,7 +262,7 @@ class SuratController extends Controller
             return redirect()->route('surat.index');
         }
 
-        $surat = Surat::findOrFail($id);
+        $surat = Surat::where('slug', $id)->orWhere('id', $id)->firstOrFail();
 
         $data = $request->all();
         if ($request->status == 'disetujui') {
@@ -308,7 +308,7 @@ class SuratController extends Controller
                         ';
                     }
                     $buttons .= '
-                        <a href="' . route('surat.show', $item->id) . '" class="btn btn-sm btn-info text-white" target="_blank" title="Print">
+                        <a href="' . route('surat.show', $item->slug) . '" class="btn btn-sm btn-info text-white" target="_blank" title="Print">
                             <i class="fa-solid fa-print"></i>
                         </a>
                     ';
@@ -347,7 +347,7 @@ class SuratController extends Controller
                 })
                 ->addColumn('action', function ($item) {
                     if (Auth::user()->is_admin || Auth::user()->is_dekan) {
-                        return '<a href="' . route('surat.show', $item->id) . '" class="btn btn-sm btn-info text-white" target="_blank"><i class="fa-solid fa-print"></i></a>';
+                        return '<a href="' . route('surat.show', $item->slug) . '" class="btn btn-sm btn-info text-white" target="_blank"><i class="fa-solid fa-print"></i></a>';
                     }
                 })
                 ->editColumn('no_unik', function ($item) {

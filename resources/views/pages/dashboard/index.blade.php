@@ -42,7 +42,7 @@
                                         <p class="mb-0 text-success"><i
                                                 class="fa-solid fa-check-circle me-1 text-success"></i>
                                             Pengajuan Selesai! Surat Anda sudah dapat dicetak.</p>
-                                        <a href="{{ route('surat.show', $latestKP->id) }}"
+                                         <a href="{{ route('surat.show', $latestKP->slug) }}"
                                             class="btn btn-sm btn-info text-white" target="_blank">
                                             <i class="fa-solid fa-print me-1"></i> Cetak Surat
                                         </a>
@@ -72,7 +72,7 @@
                                         <p class="mb-0 text-success"><i
                                                 class="fa-solid fa-check-circle me-1 text-success"></i>
                                             Pengajuan Selesai! Surat Anda sudah dapat dicetak.</p>
-                                        <a href="{{ route('surat.show', $latestPenelitian->id) }}"
+                                        <a href="{{ route('surat.show', $latestPenelitian->slug) }}"
                                             class="btn btn-sm btn-info text-white" target="_blank">
                                             <i class="fa-solid fa-print me-1"></i> Cetak Surat
                                         </a>

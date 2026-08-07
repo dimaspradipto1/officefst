@@ -26,10 +26,10 @@ class SuratDataTable extends DataTable
             ->addColumn('DT_RowIndex', '')
             ->addColumn('action', function($item){
                 return '
-                         <a href="' . route('surat.edit', $item->id) . '" class="btn btn-sm btn-warning text-white rounded me-2" title="edit">
+                         <a href="' . route('surat.edit', $item->slug) . '" class="btn btn-sm btn-warning text-white rounded me-2" title="edit">
                              <i class="fa-solid fa-pen-to-square"></i>
                          </a>
-                         <form action="' . route('surat.destroy', $item->id) . '" method="POST" class="d-inline">
+                         <form action="' . route('surat.destroy', $item->slug) . '" method="POST" class="d-inline">
                              ' . csrf_field() . '
                              ' . method_field('delete') . '
                              <button type="submit" class="btn btn-danger btn-sm" title="hapus">

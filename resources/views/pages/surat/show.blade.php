@@ -256,7 +256,7 @@
         <div class="content">
             <p>
                 Bersama ini kami sampaikan bahwa berdasarkan Peraturan Akademik di Fakultas
-                Sains dan Teknilogin Universitas Ibnu Sina, dimana setiap Mahasiswa yang telah lulus minimal
+                Sains dan Teknologi Universitas Ibnu Sina, dimana setiap Mahasiswa yang telah lulus minimal
                 120 SKS diwajibkan mengikuti Kerja Praktek di Perusahaan. Untuk itu kami mohon
                 kesediaan Bapak / Ibu kiranya dapat menerima Mahasiswa kami untuk melakukan
                 Kerja Praktek selama 3 (tiga) bulan pada Perusahaan yang Bapak / Ibu Pimpin.
@@ -332,7 +332,7 @@
 
                 <!-- Cap and Signature -->
                 <div
-                    style="position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: -10px;">
+                    style="display: flex; justify-content: center; align-items: center; margin-bottom: -10px;">
                     <img src="{{ asset('assets/img/surat/sanusi.png') }}" alt="Tanda Tangan" class="stamp"
                         style="width: 250px; position: absolute; z-index: 1; margin-top: 40px;">
                     <img src="{{ asset('assets/img/surat/cap_fst.png') }}" alt="Stempel" class="cap"
