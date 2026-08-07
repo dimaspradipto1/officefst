@@ -208,7 +208,7 @@
             <h2>UNIVERSITAS IBNU SINA (UIS)</h2>
             <h3>FAKULTAS SAINS DAN TEKNOLOGI</h3>
             <p>Jalan Teuku Umar, Lubuk Baja Kota Batam Indonesia Telp. 0778 425391</p>
-            <p>Email: fakultas.teknik@uis.ac.id | Website: fst.uis.ac.id</p>
+            <p>Email: fst@uis.ac.id | Website: fst.uis.ac.id</p>
         </div>
 
         <!-- Garis Pembatas -->
